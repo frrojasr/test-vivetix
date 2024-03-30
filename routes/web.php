@@ -23,7 +23,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('/event', [EventController::class, 'store'])->name('event.store');
 
-    Route::get('/sales', [SaleController::class, 'index'])->name('sales');
+    Route::get('/sales', [SaleController::class, 'index'])->name('sales.list');
 
     Route::post('/sales', [SaleController::class, 'store'])->name('sale.store');
 });

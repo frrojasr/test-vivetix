@@ -34,6 +34,8 @@ class SaleController extends Controller
         try {
             $event = Event::where('id', $request->event_id)->first();
 
+          
+
             if ($request->qty_tickets <= $event->remaining_tickets) {
                 $sale = new Sale();
                 $sale->event_id = $request->event_id;
@@ -56,11 +58,16 @@ class SaleController extends Controller
                 $event->save();
 
             } else {
-                return redirect()->route('sales')->withErrors(['No hay disponibilidad de tickets solicitados']);
+                return redirect()->route('sales.list')->withErrors(['No hay disponibilidad de tickets solicitados']);
             }
-            return redirect()->route('sales')->with('success', 'Venta creada correctamente');
+
+       
         } catch (\Exception $e) {
-            return redirect()->route('sales')->with('errors', 'Un error ha ocurrido');
+            return redirect()->route('sales.list')->withErrors(['Un error ha ocurrido', $e->getMessage()]);
         }
+        
+        return redirect()->route('sales.list')->with('success', 'Venta creada correctamente');
+
     }
+    
 }

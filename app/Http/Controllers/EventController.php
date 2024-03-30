@@ -40,7 +40,7 @@ class EventController extends Controller
 
         //$event->generateTickets();
 
-        return redirect()->route('event.list')->with('success', 'Evento creado correctamente');
+        return redirect()->route('event.list')->with('success', 'Evento '. $event->name .' creado correctamente');
     }
 }
 
